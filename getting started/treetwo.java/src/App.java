@@ -66,6 +66,8 @@ public class App{
         Node root =construct(arr);
         display(root);
 
+        //remote add
+
 
     }
 }
