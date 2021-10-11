@@ -41,7 +41,8 @@
                     System.out.println(root.data);
                     System.out.println(root.left.data +"<-"+ root.data +"->" +root.right.data);
                     
-                    display(root);
+                    // display(root);
+                    display1(root);
 
 
 
@@ -52,7 +53,7 @@
                     Pair first = new Pair(root,1);
 
                     st.push(first);
-                    int pointer =1;   // as 0th already done
+                    int pointer =0;   // as 0th already done
                     while(st.size()>0){
                         // System.out.println("hi");
 
@@ -60,23 +61,25 @@
                             
 
                             if(peek.state==1){
+                                pointer++;
                                 if(arr[pointer]!=null){
                                     Node currentnode =new Node(arr[pointer]);
                                     peek.node.left =currentnode;
                                     Pair current = new Pair(currentnode,1);
                                     st.push(current);
                                 }
-                                    pointer++;
+                                    
                                     peek.state++;
 
                             }else if(peek.state==2){
+                                pointer++;
                                 if(arr[pointer]!=null){
                                     Node currentnode =new Node(arr[pointer]);
                                     peek.node.right =currentnode;
                                     Pair current = new Pair(currentnode,1);
                                     st.push(current);
                                 }
-                                pointer++;
+                                
                                 peek.state++;
 
                             }else{
@@ -86,13 +89,35 @@
                     }
                     return root;
                 }
+                public static void display1(Node root){
+
+                    if(root==null){
+                        return;
+                    }
+
+                    String str= "";
+                    str=root.left!=null?root.left.data+"<-":".<-";
+                    str+=root.data+"";
+                    str+=root.right!=null?"->"+root.right.data:"->.";
+
+                    System.out.println(str);
+
+                    display1(root.left);
+                    display1(root.right);
+
+                }
                 public static void display(Node root){
                     Stack<Node> st = new Stack<>();
 
                     st.push(root);
                     while(st.size()>0){
                         Node rem= st.pop();
-                        rem.left!=null?
+                        String str="";
+                        str =rem.left!=null?rem.left.data+"<-" :"."+"<-";
+                        str+=rem.data;
+
+                        str+= rem.right!=null?"->"+rem.right.data:"->.";
+                        System.out.println(str);
                         if(rem.right!=null){
                             Node right=rem.right;        //first right as so that it will go lower in the stack and executed later
                             st.push(right);
